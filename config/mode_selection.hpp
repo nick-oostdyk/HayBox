@@ -41,10 +41,7 @@ void select_mode(CommunicationBackend *backend) {
         } else if (inputs.left) {
             set_mode(
                 backend,
-                new ProjectM(
-                    socd::SOCD_2IP,
-                    { .true_z_press = true, .ledgedash_max_jump_traj = false }
-                )
+                new ProjectM(socd::SOCD_2IP, { .true_z_press = true, .ledgedash_max_jump_traj = false })
             );
         } else if (inputs.down) {
             set_mode(backend, new Ultimate(socd::SOCD_2IP));
