@@ -24,34 +24,35 @@ size_t backend_count;
 KeyboardMode *current_kb_mode = nullptr;
 
 GpioButtonMapping button_mappings[] = {
-    {&InputState::l,            5 },
-    { &InputState::left,        4 },
+    {&InputState::l,            0 },
+    { &InputState::left,        5 },
     { &InputState::down,        3 },
-    { &InputState::right,       2 },
+    { &InputState::right,       4 },
 
-    { &InputState::mod_x,       6 },
-    { &InputState::mod_y,       7 },
+    { &InputState::mod_x,       2 },
+    { &InputState::mod_y,       16},
 
-    { &InputState::select,      10},
-    { &InputState::start,       0 },
-    { &InputState::home,        11},
+    { &InputState::select,      20},
+    { &InputState::start,       17},
+    { &InputState::home,        1 },
 
-    { &InputState::c_left,      13},
-    { &InputState::c_up,        12},
-    { &InputState::c_down,      15},
-    { &InputState::a,           14},
-    { &InputState::c_right,     16},
+    { &InputState::c_left,      18},
+    { &InputState::c_up,        19},
+    { &InputState::c_down,      14},
+    { &InputState::a,           15},
+    { &InputState::c_right,     21},
 
-    { &InputState::b,           26},
-    { &InputState::x,           21},
-    { &InputState::z,           19},
-    { &InputState::up,          17},
+    { &InputState::b,           10},
+    { &InputState::x,           7 },
+    { &InputState::z,           8 },
+    { &InputState::up,          9 },
 
-    { &InputState::r,           27},
-    { &InputState::y,           22},
-    { &InputState::lightshield, 20},
-    { &InputState::midshield,   18},
+    { &InputState::r,           6 },
+    { &InputState::y,           11},
+    { &InputState::lightshield, 12},
+    { &InputState::midshield,   13},
 };
+
 size_t button_count = sizeof(button_mappings) / sizeof(GpioButtonMapping);
 
 const Pinout pinout = {
@@ -128,9 +129,9 @@ void setup() {
         backends = new CommunicationBackend *[backend_count] { primary_backend };
     }
 
-    // Default to Melee mode.
+    // Default to PM mode.
     primary_backend->SetGameMode(
-        new Melee20Button(socd::SOCD_2IP_NO_REAC, { .crouch_walk_os = false })
+        new ProjectM(socd::SOCD_2IP, { .true_z_press = true, .ledgedash_max_jump_traj = false })
     );
 }
 
